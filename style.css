@@ -1,0 +1,106 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #0f0f0f;
+    color: #eaeaea;
+}
+
+.header {
+    text-align: center;
+    padding: 30px 20px;
+    border-bottom: 1px solid #333;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+}
+
+.subtitulo {
+    color: #aaa;
+    font-size: 1rem;
+}
+
+.menu {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.categoria {
+    margin-top: 40px;
+}
+
+.categoria h2 {
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
+    color: #f0c674;
+}
+
+.categoria-titulo {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.categoria-titulo::after {
+    content: "▼";
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.categoria-conteudo {
+    max-height: 0;
+    overflow: hidden;
+    overflow-y: auto;
+    transition: max-height 0.4s ease;
+    padding-right: 4px;
+}
+
+.categoria-conteudo::-webkit-scrollbar {
+    width: 6px;
+}
+
+.categoria-conteudo::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 10px;
+}
+
+.categoria-conteudo::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.categoria.ativa .categoria-conteudo {
+    max-height: 70vh;
+}
+
+.categoria.ativa .categoria-titulo::after {
+    transform: rotate(100deg);
+}
+
+.drink-card {
+    background-color: #1a1a1a;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+}
+
+.drink-card:hover {
+    transform: scale(1.02)
+}
+
+.drink-card h3 {
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+.drink-card p {
+    margin: 5px 0;
+    line-height: 1.5;
+}
+
+.drink-card strong {
+    color: #f0c674;
+}
