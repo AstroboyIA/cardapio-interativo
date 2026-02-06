@@ -265,6 +265,12 @@ document.addEventListener('DOMContentLoaded', () => {
     renderizarAdmin('admin-premium', 'drinksPremium');
 });
 
+window.addEventListener('storage', (event) => {
+    if (event.key && event.key.startsWith('drinks')) {
+        renderizarCardapioPublico();
+    }
+});
+
 function renderizarCardapioPublico() {
     renderizarDrinks('classicos', 'drinksClassicos');
     renderizarDrinks('autorais', 'drinksAutorais');
