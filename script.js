@@ -244,10 +244,13 @@ function renderizarAdmin(idContainer, chaveStorage) {
             </label>
         `;
 
-        const checkbox = linha.querySelector('input');
+        const checkbox = linha.querySelector('input[type="checkbox"]');
+
         checkbox.addEventListener('change', () => {
             drinks[index].ativo = checkbox.checked;
             salvarDrinks(chaveStorage, drinks);
+
+            renderizarCardapioPublico();
         });
 
         container.appendChild(linha);
@@ -261,3 +264,11 @@ document.addEventListener('DOMContentLoaded', () => {
     renderizarAdmin('admin-doces', 'drinksDocesETropicais');
     renderizarAdmin('admin-premium', 'drinksPremium');
 });
+
+function renderizarCardapioPublico() {
+    renderizarDrinks('classicos', 'drinksClassicos');
+    renderizarDrinks('autorais', 'drinksAutorais');
+    renderizarDrinks('sem-alcool', 'drinksSemAlcool');
+    renderizarDrinks('doces-e-tropicais', 'drinksDocesETropicais');
+    renderizarDrinks('premium', 'drinksPremium');
+}
