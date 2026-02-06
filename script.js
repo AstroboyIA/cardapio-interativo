@@ -250,8 +250,10 @@ function renderizarAdmin(idContainer, chaveStorage) {
     });
 }
 
-renderizarAdmin('admin-classicos', 'drinksClassicos');
-renderizarAdmin('admin-autorais', 'drinksAutorais');
-renderizarAdmin('admin-sem-alcool', 'drinksSemAlcool');
-renderizarAdmin('admin-doces', 'drinksDocesETropicais');
-renderizarAdmin('admin-premium', 'drinksPremium');
+document.addEventListener('DOMContentLoaded', () => {
+    renderizarAdmin('admin-classicos', 'drinksClassicos');
+    renderizarAdmin('admin-autorais', 'drinksAutorais');
+    renderizarAdmin('admin-sem-alcool', 'drinksSemAlcool');
+    renderizarAdmin('admin-doces', 'drinksDocesETropicais');
+    renderizarAdmin('admin-premium', 'drinksPremium');
+});
