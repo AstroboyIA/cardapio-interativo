@@ -71,33 +71,55 @@ if (!localStorage.getItem("drinksClassicos")) {
 
 const drinksAutorais = [
     {
-        nome: '✨ Aurora Tropical',
+        nome: '✨ Divino',
         descricao: 'Um drink autoral com equilíbrio entre doçura e frescor.',
-        ingredientes: 'Vodka, abacaxi, hortelã, xarope artesanal, limão.',
+        ingredientes: 'Rum (60ml),xarope de capim santo(30ml), abacaxi,  água com gás.',
         ativo: true
     },
 
     {
-        nome: '🌙 Noite de Âmbar',
+        nome: '🌙 Manguetown - (copo com gelo)',
         descricao: 'Aromático e envolvente, criado para momentos especiais.',
-        ingredientes: 'Gin, especiarias, laranja, mel.',
+        ingredientes: 'Vodka (60ml), extrato de manga/fruta manga (60m), xarope simples (25ml), fermentado de gengibre.',
         ativo: true
     },
 
     {
-        nome: '🌿 Jardim Secreto',
+        nome: '🌿 Ginger Ale',
         descricao: 'Leve, herbal e surpeendente do primeiro ao último gole.',
-        ingredientes: ' Gin, pepino, manjericão, limão siciliano.',
+        ingredientes: ' Cachaça (60ml), xarope de gengibre, limão, xarope simples, água com gás, espuma de gengibre.',
         ativo: true
     },
 
     {
-        nome: '🔥 Brisa Defumada',
+        nome: '🔥 Sunshine',
         descricao: 'Um drink intenso com toque defumado e final elegante.',
-        ingredientes: 'Whisky, açúcar mascavo, bitter aromático, laranja.',
+        ingredientes: 'Vodka (60ml), xarope de hubisco (15ml), xarope simples (20ml), morango, suco de laranja, espuma de limão',
         ativo: true
 
     }
+
+    {
+        nome: 'Flor',
+        descricao: 'Descrição generica',
+        ingredientes: 'Vodka (60ml), xarope de hibisco, abacaxi, espuma de morango',
+        ativo: true
+    },
+
+    {
+        nome: 'Limonada Suíça',
+        descricao: 'Descrição generica',
+        ingredientes: 'Vodka, leite condensado, limão, ágia com gás.',
+        ativo: true
+    },
+
+    {
+        nome:'Azura',
+        descricao:'Descrição generica',
+        ingredientes: 'Suco de laranja, limão azul, espuma de limão, água com gás.',
+        ativo: true
+    }
+    
 ]
 
 if (!localStorage.getItem("drinksAutorais")) {
@@ -138,7 +160,7 @@ if (!localStorage.getItem("drinksSemAlcool")) {
     salvarDrinks("drinksSemAlcool", drinksSemAlcool);
 }
 
-const drinksDocesETropicais = [
+/*const drinksDocesETropicais = [
     {
         nome: '🥥 Piña Colada',
         descricao: 'Refrescante e leve, para todos os públicos.',
@@ -171,9 +193,9 @@ const drinksDocesETropicais = [
 
 if (!localStorage.getItem("drinksDocesETropicais")) {
     salvarDrinks("drinksDocesETropicais", drinksDocesETropicais);
-}
+}*/
 
-const drinksPremium = [
+/*const drinksPremium = [
     {
         nome: '🖤 Gin Tônica Premium',
         descricao: 'Clássico elevado ao máximo nível de sofisticação.',
@@ -205,7 +227,7 @@ const drinksPremium = [
 
 if (!localStorage.getItem("drinksPremium")) {
     salvarDrinks("drinksPremium", drinksPremium);
-}
+}*/
 
 function salvarDrinks(chave, drinks) {
     localStorage.setItem(chave, JSON.stringify(drinks));
@@ -214,8 +236,8 @@ function salvarDrinks(chave, drinks) {
 renderizarDrinks('classicos', 'drinksClassicos');
 renderizarDrinks('autorais', 'drinksAutorais');
 renderizarDrinks('sem-alcool', 'drinksSemAlcool');
-renderizarDrinks('doces-e-tropicais', 'drinksDocesETropicais');
-renderizarDrinks('premium', 'drinksPremium');
+//renderizarDrinks('doces-e-tropicais', 'drinksDocesETropicais');
+//renderizarDrinks('premium', 'drinksPremium');
 
 function carregarDrinks(chave) {
     const dados = localStorage.getItem(chave);
@@ -261,8 +283,8 @@ document.addEventListener('DOMContentLoaded', () => {
     renderizarAdmin('admin-classicos', 'drinksClassicos');
     renderizarAdmin('admin-autorais', 'drinksAutorais');
     renderizarAdmin('admin-sem-alcool', 'drinksSemAlcool');
-    renderizarAdmin('admin-doces', 'drinksDocesETropicais');
-    renderizarAdmin('admin-premium', 'drinksPremium');
+    //renderizarAdmin('admin-doces', 'drinksDocesETropicais');
+    //renderizarAdmin('admin-premium', 'drinksPremium');
 });
 
 window.addEventListener('storage', (event) => {
@@ -275,6 +297,6 @@ function renderizarCardapioPublico() {
     renderizarDrinks('classicos', 'drinksClassicos');
     renderizarDrinks('autorais', 'drinksAutorais');
     renderizarDrinks('sem-alcool', 'drinksSemAlcool');
-    renderizarDrinks('doces-e-tropicais', 'drinksDocesETropicais');
-    renderizarDrinks('premium', 'drinksPremium');
+    //renderizarDrinks('doces-e-tropicais', 'drinksDocesETropicais');
+    //renderizarDrinks('premium', 'drinksPremium');
 }
