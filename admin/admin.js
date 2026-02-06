@@ -1,7 +1,14 @@
-if (!sessionStorage.getItem('adminLogado')) {
-    window.location.href = 'index.html';
-}
+const form = document.getElementById('login-form');
 
-sessionStorage.setItem('adminLogado', 'true');
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-const logado = sessionStorage.getItem('adminLogado');
+    const senha = document.getElementById('senha').value;
+
+    if (senha === '1234') {
+        sessionStorage.setItem('adminLogado', 'true');
+        window.location.href = 'painel.html';
+    } else {
+        alert('Senha incorreta');
+    }
+});
