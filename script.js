@@ -97,7 +97,7 @@ const drinksAutorais = [
         ingredientes: 'Vodka (60ml), xarope de hubisco (15ml), xarope simples (20ml), morango, suco de laranja, espuma de limão',
         ativo: true
 
-    }
+    },
 
     {
         nome: 'Flor',
