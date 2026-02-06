@@ -1,5 +1,7 @@
 function renderizarDrinks(idContainer, chaveStorage) {
     const container = document.getElementById(idContainer);
+    if (!container) return;
+
     container.innerHTML = '';
 
     const drinks = carregarDrinks(chaveStorage);
@@ -224,6 +226,8 @@ function renderizarAdmin(idContainer, chaveStorage) {
     const container = document.getElementById(idContainer);
     if (!container) return;
 
+    console.log('Tentando renderizar:', idContainer, container);
+
     container.innerHTML = '';
 
     const drinks = carregarDrinks(chaveStorage);
@@ -234,9 +238,9 @@ function renderizarAdmin(idContainer, chaveStorage) {
 
         linha.innerHTML = `
             <span>${drink.nome}</span>
-            <label>
+            <label class="switch">
                 <input type="checkbox" ${drink.ativo ? 'checked' : ''}>
-                Ativo
+                <span class='slider'></span>
             </label>
         `;
 
