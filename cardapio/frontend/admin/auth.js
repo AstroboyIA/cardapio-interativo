@@ -10,7 +10,7 @@ form.addEventListener('submit', async (e) => {
     try {
         await ApiClient.login(senha);
         sessionStorage.setItem('adminLogado', 'true');
-        window.location.href = 'painel/painel.html';
+        window.location.href = '../painel/painel.html';
     } catch (error) {
         alert('Senha incorreta');
         console.error(error);

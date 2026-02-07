@@ -8,6 +8,13 @@ import cors from 'cors';
 
 dotenv.config();
 
+const requiredEnv = ['ADMIN_PASSWORD', 'JWT_SECRET'];
+const missingEnv = requiredEnv.filter((key) => !process.env[key]);
+if (missingEnv.length) {
+    console.error(`Variáveis de ambiente ausentes: ${missingEnv.join(', ')}`);
+    process.exit(1);
+}
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -20,7 +27,11 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/drinks', drinksRoutes);
 
-app.use(express.static(path.join(__dirname, '../')));
+app.use(express.static(path.join(__dirname, '../frontend')));
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/index.html'));
+});
 
 app.listen(PORT, () => {
     console.log(`API rodando na porta ${PORT}`);

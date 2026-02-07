@@ -1,47 +1,32 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { autenticarToken } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
-const DATA_PATH = new URL('../data/drinks.json', import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// caminho correto para o JSON
+const DATA_PATH = path.resolve(__dirname, '../data/drinks.json');
 
 function lerDados() {
-    return JSON.parse(fs.readFileSync(DATA_PATH, 'utf-8'));
+  return JSON.parse(fs.readFileSync(DATA_PATH, 'utf-8'));
 }
 
-function salvarDados(dados) {
-    fs.writeFileSync(DATA_PATH, JSON.stringify(dados, null, 2));
-}
-
+// GET público
 router.get('/:categoria', (req, res) => {
-    const { categoria } = req.params;
+  try {
     const dados = lerDados();
+    const categoria = req.params.categoria;
 
-    if (!dados[categoria]) {
-        return res.status(404).json({ error: 'Categoria não encontrada' });
-    }
-
-    res.json(dados[categoria]);
-});
-
-router.put('/:categoria/:index', autenticarToken, (req, res) => {
-    const { categoria, index } = req.params;
-    const dados = lerDados();
-
-    if (!dados[categoria] || !dados[categoria][index]) {
-        return res.status(404).json({ error: 'Drink não encontrado' });
-    }
-
-    dados[categoria][index] = {
-        ...dados[categoria][index],
-        ...req.body
-    };
-
-    salvarDados(dados);
-
-    res.json({ success: true });
+    res.json(dados[categoria] || []);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ erro: 'Erro ao ler drinks' });
+  }
 });
 
 export default router;
