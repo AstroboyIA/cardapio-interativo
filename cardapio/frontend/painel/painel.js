@@ -1,4 +1,4 @@
-import { ApiClient } from '../../js/apiClient.js';
+import { ApiClient } from '../js/apiClient.js';
 
 if (!sessionStorage.getItem('adminLogado')) {
     window.location.href = '../index.html';
