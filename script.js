@@ -244,49 +244,6 @@ function carregarDrinks(chave) {
     return dados ? JSON.parse(dados) : [];
 }
 
-function renderizarAdmin(idContainer, chaveStorage) {
-    const container = document.getElementById(idContainer);
-    if (!container) return;
-
-    console.log('Tentando renderizar:', idContainer, container);
-
-    container.innerHTML = '';
-
-    const drinks = carregarDrinks(chaveStorage);
-
-    drinks.forEach((drink, index) => {
-        const linha = document.createElement('div');
-        linha.classList.add('admin-drink');
-
-        linha.innerHTML = `
-            <span>${drink.nome}</span>
-            <label class="switch">
-                <input type="checkbox" ${drink.ativo ? 'checked' : ''}>
-                <span class='slider'></span>
-            </label>
-        `;
-
-        const checkbox = linha.querySelector('input[type="checkbox"]');
-
-        checkbox.addEventListener('change', () => {
-            drinks[index].ativo = checkbox.checked;
-            salvarDrinks(chaveStorage, drinks);
-
-            renderizarCardapioPublico();
-        });
-
-        container.appendChild(linha);
-    });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    renderizarAdmin('admin-classicos', 'drinksClassicos');
-    renderizarAdmin('admin-autorais', 'drinksAutorais');
-    renderizarAdmin('admin-sem-alcool', 'drinksSemAlcool');
-    //renderizarAdmin('admin-doces', 'drinksDocesETropicais');
-    //renderizarAdmin('admin-premium', 'drinksPremium');
-});
-
 window.addEventListener('storage', (event) => {
     if (event.key && event.key.startsWith('drinks')) {
         renderizarCardapioPublico();
