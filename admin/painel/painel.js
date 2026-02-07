@@ -1,19 +1,23 @@
+import { ApiClient } from '../../js/apiClient.js';
+
 if (!sessionStorage.getItem('adminLogado')) {
-    window.location.href = 'index.html';
+    window.location.href = '../auth.html';
 }
 
 document.getElementById('logout').addEventListener('click', () => {
     sessionStorage.removeItem('adminLogado');
-    window.location.href = 'index.html';
+    window.location.href = '../auth.html';
 });
 
-function renderizarAdmin(idContainer, chaveStorage) {
+async function renderizarAdmin(idContainer, chaveStorage) { 
     const container = document.getElementById(idContainer);
     if (!container) return;
 
+    container.innerHTML = 'Carregando...';
+
+    const drinks = await ApiClient.getDrinks(chaveStorage);
     container.innerHTML = '';
 
-    const drinks = carregarDrinks(chaveStorage);
     drinks.forEach((drink, index) => {
         const linha = document.createElement('div');
         linha.classList.add('admin-drink');
@@ -25,10 +29,10 @@ function renderizarAdmin(idContainer, chaveStorage) {
             </label>
         `;
         const checkbox = linha.querySelector('input');
-        checkbox.addEventListener('change', () => {
-            drinks[index].ativo = checkbox.checked;
-            salvarDrinks(chaveStorage, drinks);
-            renderizarCardapioPublico();
+        checkbox.addEventListener('change', async () => {
+            await ApiClient.atualizarDrink(chaveStorage, index, {
+                ativo: checkbox.checked
+            });
         });
         container.appendChild(linha);
     });
@@ -36,6 +40,4 @@ function renderizarAdmin(idContainer, chaveStorage) {
 
 renderizarAdmin('admin-classicos', 'drinksClassicos');
 renderizarAdmin('admin-autorais', 'drinksAutorais');
-renderizarAdmin('admin-sem-alcool', 'drinksSemAlcool');
-//renderizarAdmin('admin-doces', 'drinksDocesETropicais');
-//renderizarAdmin('admin-premium', 'drinksPremium');
+renderizarAdmin('admin-coqueteis', 'drinksCoqueteis');

@@ -1,22 +1,16 @@
-import { Drink } from '../domain/Drink.js';
-import { DrinkStorage } from '../storage/DrinkStorage.js';
+import { ApiClient } from '../apiClient.js';
 
 export class DrinkService {
 
-    static listar(chave) {
-        return DrinkStorage.carregar(chave);
+    static async listar(chave) {
+        return await ApiClient.getDrinks(chave);
     }
 
-    static alternarStatus(chave, index) {
-        const drinks = DrinkStorage.carregar(chave);
-        const drink = drinks[index];
-
-        if (drink.ativo) {
-            drink.ativo = false;
-        } else {
-            drink.ativo = true;
+    static async alternarStatus(chave, index) {
+        const drinks = await ApiClient.getDrinks(chave);
+        if (drinks[index]) {
+            const novoStatus = !drinks[index].ativo;
+            await ApiClient.atualizarDrink(chave, index, { ativo: novoStatus });
         }
-
-        DrinkStorage.salvar(chave, drinks);
     }
 }

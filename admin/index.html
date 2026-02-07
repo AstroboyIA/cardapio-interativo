@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <title>Admin - Login</title>
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="auth.css">
 </head>
+
 <body>
 
-    <h1>Área Administrativa</h1>
+    <header class="header">
+        <h1>Área Administrativa</h1>
+        <p class="subtitulo">Acesso Restrito</p>
+    </header>
+
 
     <form id="login-form">
         <input type="password" id="senha" placeholder="Digite a senha">
         <button type="submit">Entrar</button>
     </form>
 
-    <script src="admin.js"></script>
+    <script type="module" src="auth.js"></script>
 </body>
+
 </html>
