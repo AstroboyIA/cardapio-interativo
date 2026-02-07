@@ -6,7 +6,7 @@ if (!sessionStorage.getItem('adminLogado')) {
 
 document.getElementById('logout').addEventListener('click', () => {
     sessionStorage.removeItem('adminLogado');
-    window.location.href = '../auth.html';
+    window.location.href = '../index.html';
 });
 
 async function renderizarAdmin(idContainer, chaveStorage) { 

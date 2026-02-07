@@ -1,7 +1,16 @@
 import authRoutes from './routes/auth.routes.js';
 import drinksRoutes from './routes/drinks.routes.js';
+import { fileURLToPath } from 'url';
+import path from 'path';
+import dotenv from 'dotenv';
+import express from 'express';
+import cors from 'cors';
+import fs from 'fs';
+import path from 'path';
+dotenv.config();
 
-require('dotenv').config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs');

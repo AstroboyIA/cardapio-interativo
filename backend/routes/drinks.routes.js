@@ -5,7 +5,7 @@ import { autenticarToken } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
-const DATA_PATH = path.join(__dirname, '...', 'data', 'drinks.json');
+const DATA_PATH = path.join(__dirname, '..', 'data', 'drinks.json');
 
 function lerDados() {
     return JSON.parse(fs.readFileSync(DATA_PATH, 'utf-8'));
