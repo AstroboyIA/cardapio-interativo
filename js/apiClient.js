@@ -26,10 +26,10 @@ export const ApiClient = {
 
     async atualizarDrink(categoria, index, dadosAtualizados) {
         const token = sessionStorage.getItem('authToken');
-        
+
         const response = await fetch(`${API_BASE_URL}/drinks/${categoria}/${index}`, {
             method: 'PUT',
-            headers: { 
+            headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
@@ -37,5 +37,7 @@ export const ApiClient = {
         });
 
         if (!response.ok) throw new Error('Erro ao atualizar drink');
+        
+        localStorage.setItem('drinksUpdatedAt', Date.now().toString());
     }
 };

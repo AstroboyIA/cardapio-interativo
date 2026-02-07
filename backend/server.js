@@ -5,16 +5,11 @@ import path from 'path';
 import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
-import fs from 'fs';
-import path from 'path';
+
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const express = require('express');
-const cors = require('cors');
-const fs = require('fs');
-const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
