@@ -1,3 +1,7 @@
+import { Drink } from './domain/Drink.js';
+import { DrinkStorage } from './storage/DrinkStorage.js';
+import { DrinkService } from './services/DrinkService.js';
+
 function renderizarDrinks(idContainer, chaveStorage) {
     const container = document.getElementById(idContainer);
     if (!container) return;
@@ -33,41 +37,55 @@ categorias.forEach(categoria => {
     });
 });
 
-const drinksClassicos = [
+const CHAVE_CLASSICOS = 'drinksClassicos';
 
-    {
-        nome: "🍸 Mojito",
-        descricao: "Refrescante e equilibrado, perfeito para eventos ao ar livre.",
-        ingredientes: " Rum, hortelã, limão, açúcar, água com gás.",
-        ativo: true
-    },
+if (!localStorage.getItem(CHAVE_CLASSICOS)) {
+    const drinksClassicos = [
+        new Drink(
+            '🍸 Mojito',
+            'Refrescante e equilibrado, perfeito para eventos ao ar livre.',
+            'Rum, hortelã, limão, açúcar, água com gás'
+        ),
+        new Drink(
+            '🍹 Caipirinha',
+            'O clássico brasileiro que não pode faltar.',
+            'Cachaça, limão, açúcar'
+        ),
+        new Drink(
+            '🍊 Negroni',
+            'Intenso e sofisticado, ideal para quem aprecia sabores marcantes.',
+            'Gin, vermute rosso, Campari'
+        ),
+        new Drink(
+            '🍋 Margarita',
+            'Cítrica e vibrante, com final seco e elegante.',
+            'Tequila, licor de laranja, limão'
+        )
+    ];
 
-    {
-        nome: "🍹 Caipirinha",
-        descricao: "O clássico brasileiro que não pode faltar.",
-        ingredientes: "Cachaça, limão, açúcar.",
-        ativo: true
-    },
-
-    {
-        nome: "🍊 Negroni",
-        descricao: "Intenso e sofisticado, ideal para quem aprecia sabores marcantes.",
-        ingredientes: "Gin, vermute rosso, Campari.",
-        ativo: true
-    },
-
-    {
-        nome: "🍋 Margarita",
-        descricao: "Cítrica e vibrante, com final seco e elegante.",
-        ingredientes: "Tequila, licor de laranja, limão.",
-        ativo: true
-    }
-
-]
-
-if (!localStorage.getItem("drinksClassicos")) {
-    salvarDrinks("drinksClassicos", drinksClassicos);
+    DrinkStorage.salvar(CHAVE_CLASSICOS, drinksClassicos);
 }
+
+function renderizarClassicos() {
+    const container = document.getElementById('classicos');
+    container.innerHTML = '';
+
+    const drinks = DrinkService.listar(CHAVE_CLASSICOS);
+
+    drinks.forEach(drink => {
+        if (!drink.ativo) return;
+
+        container.innerHTML += `
+            <div class="drink-card">
+                <h3>${drink.nome}</h3>
+                <p>${drink.descricao}</p>
+                <p><strong>Ingredientes:</strong> ${drink.ingredientes}</p>
+            </div>
+        `;
+    });
+}
+
+renderizarClassicos();
 
 const drinksAutorais = [
     {
@@ -114,12 +132,12 @@ const drinksAutorais = [
     },
 
     {
-        nome:'Azura',
-        descricao:'Descrição generica',
+        nome: 'Azura',
+        descricao: 'Descrição generica',
         ingredientes: 'Suco de laranja, limão azul, espuma de limão, água com gás.',
         ativo: true
     }
-    
+
 ]
 
 if (!localStorage.getItem("drinksAutorais")) {
