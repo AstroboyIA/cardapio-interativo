@@ -1,7 +1,7 @@
 import { ApiClient } from '../../js/apiClient.js';
 
 if (!sessionStorage.getItem('adminLogado')) {
-    window.location.href = '../auth.html';
+    window.location.href = '../index.html';
 }
 
 document.getElementById('logout').addEventListener('click', () => {
