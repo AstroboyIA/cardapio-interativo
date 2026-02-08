@@ -2,8 +2,7 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { autenticarToken } from '../middlewares/authMiddleware.js';
-import { apenasAdmin } from '../middlewares/adminMiddleware.js';
+import { autenticarToken, apenasAdmin } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
@@ -28,21 +27,23 @@ router.get('/:categoria', (req, res) => {
     }
 });
 
-export default router;
-
-router.put('/:categoria', autenticarToken, apenasAdmin, (req, res) => {
+router.put('/:categoria/:index', autenticarToken, apenasAdmin, (req, res) => {
     try {
+        const { categoria, index } = req.params;
+        const novosDados = req.body;
         const dados = lerDados();
-        const categoria = req.params.categoria;
 
-        dados[categoria] = novosDados;
-
-        fs.writeFileSync(DATA_PATH, JSON.stringify(dados, null, 2));
-
-        res.json({ mensagem: 'Categoria atualizada com sucesso' });
+        if (dados[categoria] && dados[categoria][index]) {
+            dados[categoria][index] = { ...dados[categoria][index], ...novosDados };
+            fs.writeFileSync(DATA_PATH, JSON.stringify(dados, null, 2));
+            res.json({ mensagem: 'Drink atualizado com sucesso' });
+        } else {
+            res.status(404).json({ erro: 'Drink não encontrado' });
+        }
     } catch (err) {
         console.error(err);
-        res.status(500).json({ erro: 'Erro ao atualizar drinks' });
+        res.status(500).json({ erro: 'Erro ao atualizar drink' });
     }
-}
-);
+});
+
+export default router;
