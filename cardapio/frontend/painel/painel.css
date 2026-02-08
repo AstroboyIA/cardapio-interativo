@@ -9,16 +9,30 @@ body {
     text-align: center;
     padding: 30px 20px;
     border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .header h1 {
-    font-size: 2.5rem;
-    letter-spacing: 2px;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    margin: 0;
 }
 
-.subtitulo {
-    color: #ff0000;
-    font-size: 1.5rem;
+#logout {
+    background-color: #c62828;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+#logout:hover {
+    background-color: #b71c1c;
 }
 
 .menu {
@@ -45,10 +59,23 @@ body {
 }
 
 .categoria-conteudo {
-    cursor: pointer;
-    display: flex; 
-    align-items: center;
+    margin-top: 15px;
+}
+
+.admin-drink {
+    display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    border: 1px solid #333;
+    transition: border-color 0.3s;
+}
+
+.admin-drink:hover {
+    border-color: #f0c674;
 }
 
 .switch {

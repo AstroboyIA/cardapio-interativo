@@ -163,3 +163,30 @@ input:checked+.slider {
 input:checked+.slider::before {
     transform: translateX(22px);
 }
+
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 40px;
+    border-top: 1px solid #333;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.creditos {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.creditos a {
+    color: #eaeaea;
+    display: flex;
+    transition: color 0.2s;
+}
+
+.creditos a:hover {
+    color: #f0c674;
+}
