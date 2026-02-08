@@ -18,3 +18,11 @@ export function autenticarToken(req, res, next) {
     next();
   });
 }
+
+export function apenasAdmin(req, res, next) {
+  if (!req.usuario || req.usuario.role !== 'admin') {
+    return res.status(403).json({ erro: 'Acesso restrito ao administrador' });
+  }
+
+  next();
+}
