@@ -20,7 +20,7 @@ function renderizarDrinks(idContainer, chaveStorage, silencioso = false) {
 
             card.innerHTML = `
                 <div class="drink-foto">
-                    <!-- Futuramente, coloque a tag img aqui: <img src="url-da-foto.jpg" alt="${drink.nome}"> -->
+                    ${drink.imagem ? `<img src="${drink.imagem}" alt="${drink.nome}">` : ''}
                 </div>
                 <div class="drink-info">
                     <h3>${drink.nome}</h3>
