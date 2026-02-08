@@ -11,7 +11,8 @@
       "nome": "🍹 Caipirinha",
       "descricao": "O clássico brasileiro que não pode faltar.",
       "ingredientes": "Cachaça, limão, açúcar",
-      "ativo": true
+      "ativo": true,
+      "imagem": "assets/img/caipirinha-exemplo.jpeg"
     },
     {
       "nome": "🍊 Negroni",
