@@ -17,9 +17,14 @@ function renderizarDrinks(idContainer, chaveStorage) {
             card.classList.add('drink-card');
 
             card.innerHTML = `
-                <h3>${drink.nome}</h3>
-                <p>${drink.descricao}</p>
-                <p><strong>Ingredientes:</strong> ${drink.ingredientes}</p>
+                <div class="drink-foto">
+                    <!-- Futuramente, coloque a tag img aqui: <img src="url-da-foto.jpg" alt="${drink.nome}"> -->
+                </div>
+                <div class="drink-info">
+                    <h3>${drink.nome}</h3>
+                    <p class="descricao">${drink.descricao}</p>
+                    <p class="ingredientes"><strong>Ingredientes:</strong> ${drink.ingredientes}</p>
+                </div>
             `;
 
             container.appendChild(card);
