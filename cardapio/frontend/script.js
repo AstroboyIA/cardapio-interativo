@@ -1,10 +1,12 @@
 import { ApiClient } from './js/apiClient.js';
 
-function renderizarDrinks(idContainer, chaveStorage) {
+function renderizarDrinks(idContainer, chaveStorage, silencioso = false) {
     const container = document.getElementById(idContainer);
     if (!container) return;
 
-    container.innerHTML = 'Carregando...';
+    if (!silencioso) {
+        container.innerHTML = 'Carregando...';
+    }
 
     ApiClient.getDrinks(chaveStorage).then(drinks => {
         container.innerHTML = '';
@@ -57,8 +59,12 @@ window.addEventListener('storage', (event) => {
     }
 });
 
-function renderizarCardapioPublico() {
-    renderizarDrinks('classicos', 'drinksClassicos');
-    renderizarDrinks('autorais', 'drinksAutorais');
-    renderizarDrinks('coqueteis', 'drinksCoqueteis');
+function renderizarCardapioPublico(silencioso = false) {
+    renderizarDrinks('classicos', 'drinksClassicos', silencioso);
+    renderizarDrinks('autorais', 'drinksAutorais', silencioso);
+    renderizarDrinks('coqueteis', 'drinksCoqueteis', silencioso);
 }
+
+setInterval(() => {
+    renderizarCardapioPublico(true);
+}, 5000);
