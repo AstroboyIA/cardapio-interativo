@@ -4,7 +4,8 @@
       "nome": "🍸 Mojito",
       "descricao": "Refrescante e equilibrado, perfeito para eventos ao ar livre.",
       "ingredientes": "Rum, hortelã, limão, açúcar, água com gás",
-      "ativo": true
+      "ativo": true,
+      "imagem": "assets/img/mojito-exemplo.jpeg"
     },
     {
       "nome": "🍹 Caipirinha",
