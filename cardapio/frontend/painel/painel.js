@@ -18,7 +18,7 @@ async function renderizarAdmin(idContainer, chaveStorage) {
     const drinks = await ApiClient.getDrinks(chaveStorage);
     container.innerHTML = '';
 
-    drinks.forEach((drink, index) => {
+    drinks.forEach((drink) => {
         const linha = document.createElement('div');
         linha.classList.add('admin-drink');
         linha.innerHTML = `
@@ -30,7 +30,7 @@ async function renderizarAdmin(idContainer, chaveStorage) {
         `;
         const checkbox = linha.querySelector('input');
         checkbox.addEventListener('change', async () => {
-            await ApiClient.atualizarDrink(chaveStorage, index, {
+            await ApiClient.atualizarDrink(drink.id, {
                 ativo: checkbox.checked
             });
         });

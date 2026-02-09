@@ -20,16 +20,16 @@ export const ApiClient = {
     },
 
     async getDrinks(categoria) {
-        const response = await fetch(`${API_BASE_URL}/drinks/${categoria}`);
+        const response = await fetch(`${API_BASE_URL}/drinks/categoria/${categoria}`);
         if (!response.ok) throw new Error('Erro ao buscar drinks');
         return response.json();
     },
 
-    async atualizarDrink(categoria, index, dadosAtualizados) {
+    async atualizarDrink(id, dadosAtualizados) {
         const token = sessionStorage.getItem('authToken');
 
-        const response = await fetch(`${API_BASE_URL}/drinks/${categoria}/${index}`, {
-            method: 'PUT',
+        const response = await fetch(`${API_BASE_URL}/drinks/${id}/status`, {
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
