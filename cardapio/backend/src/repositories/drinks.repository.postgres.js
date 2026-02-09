@@ -4,6 +4,7 @@ import db from '../database/db.js';
 export default class DrinksRepositoryPostgres extends DrinksRepository {
 
     async listarTodos() {
+
         const { rows } = await db.query(`
             SELECT
                 d.id,
@@ -21,6 +22,7 @@ export default class DrinksRepositoryPostgres extends DrinksRepository {
     }
 
     async listarAtivos() {
+        
         const { rows } = await db.query(`
             SELECT
                 d.id,
@@ -39,6 +41,7 @@ export default class DrinksRepositoryPostgres extends DrinksRepository {
     }
 
     async listarPorCategoria(categoria) {
+        // Filtra por categoria (slug)
         const { rows } = await db.query(`
             SELECT
                 d.id,
@@ -57,6 +60,7 @@ export default class DrinksRepositoryPostgres extends DrinksRepository {
     }
 
     async buscarPorId(id) {
+        // Busca um drink por ID
         const { rows } = await db.query(`
             SELECT
                 d.id,
@@ -76,6 +80,7 @@ export default class DrinksRepositoryPostgres extends DrinksRepository {
     async criar(categoria, dados) {
         const { nome, descricao, ingredientes, imagem, ativo } = dados;
 
+        // Descobre o ID da categoria a partir do slug
         const categoryResult = await db.query(
             'SELECT id FROM categories WHERE slug = $1',
             [categoria]
@@ -87,6 +92,7 @@ export default class DrinksRepositoryPostgres extends DrinksRepository {
 
         const categoryId = categoryResult.rows[0].id;
 
+        // Insere e ja retorna o drink criado com o slug da categoria
         const { rows } = await db.query(`
             WITH inserted AS (
                 INSERT INTO drinks
@@ -117,6 +123,7 @@ export default class DrinksRepositoryPostgres extends DrinksRepository {
     }
 
     async atualizar(id, dados) {
+
         const updates = [];
         const values = [];
         let index = 1;
@@ -161,6 +168,7 @@ export default class DrinksRepositoryPostgres extends DrinksRepository {
         }
 
         if (updates.length === 0) {
+            // Se nao ha campos, retorna o atual (ou erro)
             const existing = await this.buscarPorId(id);
             if (!existing) throw new Error("Drink não encontrado.");
             return existing;
@@ -178,18 +186,22 @@ export default class DrinksRepositoryPostgres extends DrinksRepository {
             throw new Error("Drink não encontrado.");
         }
 
+        // Retorna o registro final atualizado
         return this.buscarPorId(id);
     }
 
     async ativar(id) {
+        
         return this.#updateStatus(id, true);
     }
 
     async desativar(id) {
+        
         return this.#updateStatus(id, false);
     }
 
     async #updateStatus(id, ativo) {
+        // Atualiza apenas o campo "ativo" e retorna o registro
         const { rows } = await db.query(`
             WITH updated AS (
                 UPDATE drinks
@@ -217,6 +229,7 @@ export default class DrinksRepositoryPostgres extends DrinksRepository {
     }
 
     async remover(id) {
+        // Remove e retorna o registro removido
         const { rows } = await db.query(`
             WITH deleted AS (
                 DELETE FROM drinks
@@ -242,3 +255,13 @@ export default class DrinksRepositoryPostgres extends DrinksRepository {
         return rows[0];
     }
 }
+
+// Preparar mapeamento de slugs diferentes (se um dia mudar os nomes)
+/*
+// Se quiser usar slugs curtos, mapear aqui:
+const categoriaMap = {
+  classicos: 'drinksClassicos',
+  autorais: 'drinksAutorais',
+  coqueteis: 'drinksCoqueteis',
+};
+*/

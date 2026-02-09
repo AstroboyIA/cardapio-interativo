@@ -1,14 +1,17 @@
 export default class DrinksService {
 
     constructor(drinksRepository) {
+        // Recebe o repositorio (JSON ou Postgres)
         this.drinksRepository = drinksRepository;
     }
 
     listarAtivos() {
+        // Lista apenas drinks ativos
         return this.drinksRepository.listarAtivos();
     }
 
     listarTodos() {
+        // Lista todos os drinks (admin)
         return this.drinksRepository.listarTodos();
     }
 
@@ -17,6 +20,7 @@ export default class DrinksService {
             throw new Error("Categoria é obrigatória");
         }
 
+        // Encaminha para o repositorio
         return this.drinksRepository.listarPorCategoria(categoria);
     }
 
@@ -27,6 +31,7 @@ export default class DrinksService {
         if (!categoria || !nome || !descricao || !ingredientes)
             throw new Error("Categoria, nome, descrição e ingredientes são obrigatórios.");
 
+        // Cria um novo drink com status ativo
         return this.drinksRepository.criar(categoria, {
             nome,
             descricao,
@@ -41,16 +46,19 @@ export default class DrinksService {
             throw new Error("ID é obrigatório.");
         }
 
+        // Atualiza campos informados
         return this.drinksRepository.atualizar(id, dados);
     }
 
     ativar(id) {
         if (!id) throw new Error('ID inválido.');
+        // Ativa o drink
         return this.drinksRepository.ativar(id);
     }
 
     desativar(id) {
         if (!id) throw new Error('ID inválido.');
+        // Desativa o drink
         return this.drinksRepository.desativar(id);
     }
 
@@ -59,6 +67,7 @@ export default class DrinksService {
             throw new Error("ID inválido.");
         }
 
+        // Remove o drink
         return this.drinksRepository.remover(id);
     }
 }

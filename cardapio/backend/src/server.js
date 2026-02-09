@@ -6,12 +6,15 @@ import DrinksController from './controllers/drinks.controller.js';
 
 dotenv.config();
 
+// Monta as dependencias em cadeia (Repository -> Service -> Controller)
 const drinksRepository = makeDrinksRepository();
 const drinksService = new DrinksService(drinksRepository);
 const drinksController = new DrinksController(drinksService);
 
+// Cria a aplicacao Express
 const app = createApp({ drinksController });
 
+// Garante que variaveis criticas existam antes de subir o servidor
 const requiredEnv = ['ADMIN_PASSWORD', 'JWT_SECRET'];
 const missingEnv = requiredEnv.filter((key) => !process.env[key]);
 
@@ -25,3 +28,10 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`API rodando na porta ${PORT}`);
 });
+
+// Preparar selecao de repositorio via variavel unica
+/*
+// Usar uma variavel clara para selecionar o repositorio.
+// Exemplo: DB_DRIVER=postgres para ligar o Postgres.
+const drinksRepository = makeDrinksRepository();
+*/

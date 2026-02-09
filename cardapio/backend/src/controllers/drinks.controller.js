@@ -1,10 +1,12 @@
 export default class DrinksController {
     constructor(drinksService) {
+        // Injeta o service para usar a regra de negocio
         this.drinksService = drinksService;
     }
 
     listarAtivos = async (req, res) => {
         try {
+            // Busca somente drinks ativos
             const drinks = await this.drinksService.listarAtivos();
             return res.json(drinks);
         } catch (error) {
@@ -14,6 +16,7 @@ export default class DrinksController {
 
     listarTodos = async (req, res) => {
         try {
+            // Busca todos os drinks (admin)
             const drinks = await this.drinksService.listarTodos();
             return res.json(drinks);
         } catch (error) {
@@ -24,6 +27,7 @@ export default class DrinksController {
     listarPorCategoria = async (req, res) => {
         try {
             const { categoria } = req.params;
+            // Filtra pela categoria informada na rota
             const drinks = await this.drinksService.listarPorCategoria(categoria);
             return res.json(drinks);
         } catch (error) {
@@ -33,6 +37,7 @@ export default class DrinksController {
 
     criar = async (req, res) => {
         try {
+            // Cria um novo drink
             const drink = await this.drinksService.criar(req.body);
             return res.status(201).json(drink);
 
@@ -43,6 +48,7 @@ export default class DrinksController {
 
     atualizar = async (req, res) => {
         try {
+            // Atualiza qualquer campo enviado
             const drink = await this.drinksService.atualizar(
                 req.params.id,
                 req.body
@@ -57,10 +63,12 @@ export default class DrinksController {
         try {
             const { ativo } = req.body;
 
+            // Garante que o campo ativo seja boolean
             if (typeof ativo !== 'boolean') {
                 return res.status(400).json({ error: 'Campo ativo deve ser boolean' });
             }
 
+            // Atualiza status usando o service
             const drink = ativo
                 ? await this.drinksService.ativar(req.params.id)
                 : await this.drinksService.desativar(req.params.id);
@@ -74,6 +82,7 @@ export default class DrinksController {
 
     ativar = async (req, res) => {
         try {
+            // Ativa um drink pelo ID
             await this.drinksService.ativar(req.params.id);
             return res.sendStatus(204);
         } catch (error) {
@@ -83,6 +92,7 @@ export default class DrinksController {
 
     desativar = async (req, res) => {
         try {
+            // Desativa um drink pelo ID
             await this.drinksService.desativar(req.params.id);
             return res.sendStatus(204);
         } catch (error) {
@@ -92,6 +102,7 @@ export default class DrinksController {
 
     remover = async (req, res) => {
         try {
+            // Remove um drink pelo ID
             await this.drinksService.remover(req.params.id);
             return res.sendStatus(204);
         } catch (error) {
