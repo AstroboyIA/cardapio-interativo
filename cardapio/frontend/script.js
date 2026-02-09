@@ -1,6 +1,7 @@
 import { ApiClient } from './js/apiClient.js';
 
 function renderizarDrinks(idContainer, chaveStorage, silencioso = false) {
+    // Renderiza os drinks de uma categoria no cardapio publico
     const container = document.getElementById(idContainer);
     if (!container) return;
 
@@ -11,7 +12,7 @@ function renderizarDrinks(idContainer, chaveStorage, silencioso = false) {
     ApiClient.getDrinks(chaveStorage).then(drinks => {
         container.innerHTML = '';
 
-
+        // Cria os cards
         drinks.forEach(drink => {
             if (!drink.ativo) return;
 
@@ -40,6 +41,7 @@ const categorias = document.querySelectorAll('.categoria');
 categorias.forEach(categoria => {
     const titulo = categoria.querySelector('.categoria-titulo');
 
+    // Abre/fecha cada categoria ao clicar no titulo
     titulo.addEventListener('click', () => {
         categoria.classList.toggle('ativa');
     });
@@ -54,17 +56,20 @@ renderizarDrinks('autorais', 'drinksAutorais');
 renderizarDrinks('coqueteis', 'drinksCoqueteis');
 
 window.addEventListener('storage', (event) => {
+    // Sincroniza com outras abas abertas
     if (event.key && event.key.startsWith('drinks')) {
         renderizarCardapioPublico();
     }
 });
 
 function renderizarCardapioPublico(silencioso = false) {
+    // Recarrega todas as categorias
     renderizarDrinks('classicos', 'drinksClassicos', silencioso);
     renderizarDrinks('autorais', 'drinksAutorais', silencioso);
     renderizarDrinks('coqueteis', 'drinksCoqueteis', silencioso);
 }
 
 setInterval(() => {
+    // Atualiza o cardapio a cada 5s
     renderizarCardapioPublico(true);
 }, 5000);

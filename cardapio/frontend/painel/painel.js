@@ -1,20 +1,24 @@
 import { ApiClient } from '../js/apiClient.js';
 
+// Redireciona se nao estiver logado
 if (!sessionStorage.getItem('adminLogado')) {
     window.location.href = '../index.html';
 }
 
 document.getElementById('logout').addEventListener('click', () => {
+    // Limpa sessao do admin
     sessionStorage.removeItem('adminLogado');
     window.location.href = '../index.html';
 });
 
 async function renderizarAdmin(idContainer, chaveStorage) { 
+    // Renderiza os switches de ativar/desativar
     const container = document.getElementById(idContainer);
     if (!container) return;
 
     container.innerHTML = 'Carregando...';
 
+    // Busca drinks da categoria
     const drinks = await ApiClient.getDrinks(chaveStorage);
     container.innerHTML = '';
 
@@ -30,6 +34,7 @@ async function renderizarAdmin(idContainer, chaveStorage) {
         `;
         const checkbox = linha.querySelector('input');
         checkbox.addEventListener('change', async () => {
+            // Envia apenas o status atualizado
             await ApiClient.atualizarDrink(drink.id, {
                 ativo: checkbox.checked
             });
