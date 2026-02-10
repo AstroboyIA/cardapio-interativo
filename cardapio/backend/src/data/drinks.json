@@ -1,5 +1,5 @@
 {
-  "drinksClassicos": [
+  "drinks-classicos": [
     {
       "id": 1,
       "nome": "🍸 Mojito",
@@ -33,7 +33,7 @@
       "imagem": ""
     }
   ],
-  "drinksAutorais": [
+  "drinks-autorais": [
     {
       "id": 5,
       "nome": "✨ Divino",
@@ -68,7 +68,7 @@
     },
     {
       "id": 9,
-      "nome": "Flor",
+      "nome": "🌸 Flor",
       "descricao": "Descrição generica",
       "ingredientes": "Vodka (60ml), xarope de hibisco, abacaxi, espuma de morango",
       "ativo": true,
@@ -76,7 +76,7 @@
     },
     {
       "id": 10,
-      "nome": "Limonada Suíça",
+      "nome": "🍋 Limonada Suíça",
       "descricao": "Descrição generica",
       "ingredientes": "Vodka, leite condensado, limão, ágia com gás.",
       "ativo": true,
@@ -84,14 +84,14 @@
     },
     {
       "id": 11,
-      "nome": "Azura",
+      "nome": "💙 Azura",
       "descricao": "Descrição generica",
       "ingredientes": "Suco de laranja, limão azul, espuma de limão, água com gás.",
       "ativo": true,
       "imagem": ""
     }
   ],
-  "drinksCoqueteis": [
+  "drinks-coqueteis": [
     {
       "id": 12,
       "nome": "🍓 Refresco de Frutas Vermelhas",

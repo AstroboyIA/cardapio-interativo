@@ -1,6 +1,6 @@
 // Base da API (Local)
-//const API_BASE_URL = 'http://localhost:3000/api';
-const API_BASE_URL = 'https://cardapio-api-abmk.onrender.com/api';
+const API_BASE_URL = 'http://localhost:3000/api';
+//const API_BASE_URL = 'https://cardapio-api-abmk.onrender.com/api';
 
 export const ApiClient = {
 

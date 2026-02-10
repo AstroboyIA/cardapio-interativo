@@ -41,19 +41,19 @@ const categorias = document.querySelectorAll('.categoria');
 categorias.forEach(categoria => {
     const titulo = categoria.querySelector('.categoria-titulo');
 
-    // Abre/fecha cada categoria ao clicar no titulo
+    // Abre e fecha cada categoria ao clicar no titulo
     titulo.addEventListener('click', () => {
         categoria.classList.toggle('ativa');
     });
 });
 
-const CHAVE_CLASSICOS = 'drinksClassicos';
-const CHAVE_AUTORAIS = 'drinksAutorais';
-const CHAVE_COQUETEIS = 'drinksCoqueteis';
+const CHAVE_CLASSICOS = 'drinks-classicos';
+const CHAVE_AUTORAIS = 'drinks-autorais';
+const CHAVE_COQUETEIS = 'drinks-coqueteis';
 
-renderizarDrinks('classicos', 'drinksClassicos');
-renderizarDrinks('autorais', 'drinksAutorais');
-renderizarDrinks('coqueteis', 'drinksCoqueteis');
+renderizarDrinks('classicos', 'drinks-classicos');
+renderizarDrinks('autorais', 'drinks-autorais');
+renderizarDrinks('coqueteis', 'drinks-coqueteis');
 
 window.addEventListener('storage', (event) => {
     // Sincroniza com outras abas abertas
@@ -63,10 +63,10 @@ window.addEventListener('storage', (event) => {
 });
 
 function renderizarCardapioPublico(silencioso = false) {
-    // Recarrega todas as categorias
-    renderizarDrinks('classicos', 'drinksClassicos', silencioso);
-    renderizarDrinks('autorais', 'drinksAutorais', silencioso);
-    renderizarDrinks('coqueteis', 'drinksCoqueteis', silencioso);
+    
+    renderizarDrinks('classicos', 'drinks-classicos', silencioso);
+    renderizarDrinks('autorais', 'drinks-autorais', silencioso);
+    renderizarDrinks('coqueteis', 'drinks-coqueteis', silencioso);
 }
 
 setInterval(() => {

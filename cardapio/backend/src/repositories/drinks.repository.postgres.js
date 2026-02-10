@@ -255,13 +255,3 @@ export default class DrinksRepositoryPostgres extends DrinksRepository {
         return rows[0];
     }
 }
-
-// Preparar mapeamento de slugs diferentes (se um dia mudar os nomes)
-/*
-// Se quiser usar slugs curtos, mapear aqui:
-const categoriaMap = {
-  classicos: 'drinksClassicos',
-  autorais: 'drinksAutorais',
-  coqueteis: 'drinksCoqueteis',
-};
-*/

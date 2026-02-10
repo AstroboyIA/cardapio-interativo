@@ -43,6 +43,6 @@ async function renderizarAdmin(idContainer, chaveStorage) {
     });
 }
 
-renderizarAdmin('admin-classicos', 'drinksClassicos');
-renderizarAdmin('admin-autorais', 'drinksAutorais');
-renderizarAdmin('admin-coqueteis', 'drinksCoqueteis');
+renderizarAdmin('admin-classicos', 'drinks-classicos');
+renderizarAdmin('admin-autorais', 'drinks-autorais');
+renderizarAdmin('admin-coqueteis', 'drinks-coqueteis');
