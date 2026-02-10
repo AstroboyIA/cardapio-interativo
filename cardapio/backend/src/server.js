@@ -6,8 +6,6 @@ import DrinksController from './controllers/drinks.controller.js';
 
 dotenv.config();
 
-console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
-
 // Monta as dependencias em cadeia (Repository -> Service -> Controller)
 const drinksRepository = makeDrinksRepository();
 const drinksService = new DrinksService(drinksRepository);
