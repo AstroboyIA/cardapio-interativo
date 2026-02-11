@@ -10,7 +10,9 @@ export default class DrinksController {
             const drinks = await this.drinksService.listarAtivos();
             return res.json(drinks);
         } catch (error) {
-            return res.status(500).json({ error: error.message });
+            const message = error?.message || String(error);
+            console.error('[drinks] listarAtivos error:', message);
+            return res.status(500).json({ error: message });
         }
     };
 
@@ -20,7 +22,9 @@ export default class DrinksController {
             const drinks = await this.drinksService.listarTodos();
             return res.json(drinks);
         } catch (error) {
-            return res.status(500).json({ error: error.message });
+            const message = error?.message || String(error);
+            console.error('[drinks] listarTodos error:', message);
+            return res.status(500).json({ error: message });
         }
     };
 
@@ -31,7 +35,9 @@ export default class DrinksController {
             const drinks = await this.drinksService.listarPorCategoria(categoria);
             return res.json(drinks);
         } catch (error) {
-            return res.status(400).json({ error: error.message });
+            const message = error?.message || String(error);
+            console.error('[drinks] listarPorCategoria error:', message);
+            return res.status(400).json({ error: message });
         }
     };
 
@@ -42,7 +48,9 @@ export default class DrinksController {
             return res.status(201).json(drink);
 
         } catch (error) {
-            return res.status(400).json({ error: error.message });
+            const message = error?.message || String(error);
+            console.error('[drinks] criar error:', message);
+            return res.status(400).json({ error: message });
         }
     };
 
@@ -55,7 +63,9 @@ export default class DrinksController {
             );
             return res.json(drink);
         } catch (error) {
-            return res.status(400).json({ error: error.message });
+            const message = error?.message || String(error);
+            console.error('[drinks] atualizar error:', message);
+            return res.status(400).json({ error: message });
         }
     };
 
@@ -75,7 +85,9 @@ export default class DrinksController {
 
             return res.json(drink);
         } catch (error) {
-            return res.status(404).json({ error: error.message });
+            const message = error?.message || String(error);
+            console.error('[drinks] atualizarStatus error:', message);
+            return res.status(404).json({ error: message });
         }
     };
 
@@ -86,7 +98,9 @@ export default class DrinksController {
             await this.drinksService.ativar(req.params.id);
             return res.sendStatus(204);
         } catch (error) {
-            return res.status(404).json({ error: error.message });
+            const message = error?.message || String(error);
+            console.error('[drinks] ativar error:', message);
+            return res.status(404).json({ error: message });
         }
     };
 
@@ -96,7 +110,9 @@ export default class DrinksController {
             await this.drinksService.desativar(req.params.id);
             return res.sendStatus(204);
         } catch (error) {
-            return res.status(404).json({ error: error.message });
+            const message = error?.message || String(error);
+            console.error('[drinks] desativar error:', message);
+            return res.status(404).json({ error: message });
         }
     }
 
@@ -106,7 +122,9 @@ export default class DrinksController {
             await this.drinksService.remover(req.params.id);
             return res.sendStatus(204);
         } catch (error) {
-            return res.status(404).json({ error: error.message });
+            const message = error?.message || String(error);
+            console.error('[drinks] remover error:', message);
+            return res.status(404).json({ error: message });
         }
     };
 }
