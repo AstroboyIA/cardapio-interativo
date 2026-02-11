@@ -1,5 +1,10 @@
+import dns from 'dns';
 import pkg from 'pg';
 const { Pool } = pkg;
+
+if (typeof dns.setDefaultResultOrder === 'function') {
+  dns.setDefaultResultOrder('ipv4first');
+}
 
 const hasDatabaseUrl = Boolean(process.env.DATABASE_URL);
 if (hasDatabaseUrl) {
