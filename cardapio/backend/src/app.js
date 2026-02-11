@@ -1,5 +1,5 @@
 import express from 'express';
-import cors from 'cors';
+import { corsMiddleware } from './config/cors.js';
 
 import authRoutes from './routes/auth.routes.js';
 import drinksRoutes from './routes/drinks.routes.js';
@@ -16,7 +16,7 @@ export default function createApp({ drinksController }) {
     const __dirname = path.dirname(__filename);
 
     // Habilita CORS e JSON no corpo das requests
-    app.use(cors());
+    app.use(corsMiddleware);
     app.use(express.json());
 
     // Rotas da API

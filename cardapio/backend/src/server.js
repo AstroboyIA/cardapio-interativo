@@ -26,10 +26,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`API rodando na porta ${PORT}`);
 });
-
-// Preparar selecao de repositorio via variavel unica
-/*
-// Usar uma variavel clara para selecionar o repositorio.
-// Exemplo: DB_DRIVER=postgres para ligar o Postgres.
-const drinksRepository = makeDrinksRepository();
-*/
