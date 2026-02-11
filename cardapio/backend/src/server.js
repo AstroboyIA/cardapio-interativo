@@ -1,10 +1,8 @@
-import dotenv from 'dotenv';
+import './config/env.js';
 import createApp from './app.js';
 import { makeDrinksRepository } from './repositories/index.js';
 import DrinksService from './services/drinks.service.js';
 import DrinksController from './controllers/drinks.controller.js';
-
-dotenv.config();
 
 // Monta as dependencias em cadeia (Repository -> Service -> Controller)
 const drinksRepository = makeDrinksRepository();

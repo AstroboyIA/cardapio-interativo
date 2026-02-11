@@ -10,6 +10,7 @@ export default class DrinksController {
             const drinks = await this.drinksService.listarAtivos();
             return res.json(drinks);
         } catch (error) {
+            console.error('[drinks] listarAtivos error:', error);
             return res.status(500).json({ error: error.message });
         }
     };
@@ -20,6 +21,7 @@ export default class DrinksController {
             const drinks = await this.drinksService.listarTodos();
             return res.json(drinks);
         } catch (error) {
+            console.error('[drinks] listarTodos error:', error);
             return res.status(500).json({ error: error.message });
         }
     };
@@ -31,6 +33,7 @@ export default class DrinksController {
             const drinks = await this.drinksService.listarPorCategoria(categoria);
             return res.json(drinks);
         } catch (error) {
+            console.error('[drinks] listarPorCategoria error:', error);
             return res.status(400).json({ error: error.message });
         }
     };
@@ -42,6 +45,7 @@ export default class DrinksController {
             return res.status(201).json(drink);
 
         } catch (error) {
+            console.error('[drinks] criar error:', error);
             return res.status(400).json({ error: error.message });
         }
     };
@@ -55,6 +59,7 @@ export default class DrinksController {
             );
             return res.json(drink);
         } catch (error) {
+            console.error('[drinks] atualizar error:', error);
             return res.status(400).json({ error: error.message });
         }
     };
@@ -75,6 +80,7 @@ export default class DrinksController {
 
             return res.json(drink);
         } catch (error) {
+            console.error('[drinks] atualizarStatus error:', error);
             return res.status(404).json({ error: error.message });
         }
     };
@@ -86,6 +92,7 @@ export default class DrinksController {
             await this.drinksService.ativar(req.params.id);
             return res.sendStatus(204);
         } catch (error) {
+            console.error('[drinks] ativar error:', error);
             return res.status(404).json({ error: error.message });
         }
     };
@@ -96,6 +103,7 @@ export default class DrinksController {
             await this.drinksService.desativar(req.params.id);
             return res.sendStatus(204);
         } catch (error) {
+            console.error('[drinks] desativar error:', error);
             return res.status(404).json({ error: error.message });
         }
     }
@@ -106,6 +114,7 @@ export default class DrinksController {
             await this.drinksService.remover(req.params.id);
             return res.sendStatus(204);
         } catch (error) {
+            console.error('[drinks] remover error:', error);
             return res.status(404).json({ error: error.message });
         }
     };
