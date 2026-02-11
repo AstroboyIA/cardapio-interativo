@@ -4,6 +4,8 @@ const { Pool } = pkg;
 
 const isProduction = process.env.NODE_ENV === 'production';
 const hasDatabaseUrl = Boolean(process.env.DATABASE_URL);
+const parsedPoolMax = Number.parseInt(process.env.DB_POOL_MAX ?? '', 10);
+const poolMax = Number.isFinite(parsedPoolMax) && parsedPoolMax > 0 ? parsedPoolMax : 15;
 
 if (hasDatabaseUrl) {
   try {
@@ -24,6 +26,7 @@ async function createPool() {
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
+      max: poolMax,
     });
   }
 
@@ -49,6 +52,7 @@ async function createPool() {
     password: decodeURIComponent(url.password),
     database: url.pathname.replace('/', ''),
     ssl,
+    max: poolMax,
   });
 }
 
