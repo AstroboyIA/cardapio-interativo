@@ -2,6 +2,20 @@
 //const API_BASE_URL = 'http://localhost:3000/api';
 const API_BASE_URL = 'https://cardapio-api-abmk.onrender.com/api';
 
+async function parseErrorResponse(response, fallbackMessage) {
+    let details = '';
+
+    try {
+        const data = await response.json();
+        details = data?.error || data?.erro || '';
+    } catch {
+        details = await response.text();
+    }
+
+    const suffix = details ? `: ${details}` : '';
+    return new Error(`${fallbackMessage} (HTTP ${response.status})${suffix}`);
+}
+
 export const ApiClient = {
 
     async login(senha) {
@@ -12,7 +26,9 @@ export const ApiClient = {
             body: JSON.stringify({ senha })
         });
 
-        if (!response.ok) throw new Error('Falha na autenticação');
+        if (!response.ok) {
+            throw await parseErrorResponse(response, 'Falha na autenticação');
+        }
 
         const data = await response.json();
         if (data.token) {
@@ -23,8 +39,10 @@ export const ApiClient = {
 
     async getDrinks(categoria) {
         // Busca drinks por categoria
-        const response = await fetch(`${API_BASE_URL}/drinks/categoria/${categoria}`);
-        if (!response.ok) throw new Error('Erro ao buscar drinks');
+        const response = await fetch(`${API_BASE_URL}/drinks/categoria/${encodeURIComponent(categoria)}`);
+        if (!response.ok) {
+            throw await parseErrorResponse(response, 'Erro ao buscar drinks');
+        }
         return response.json();
     },
 
@@ -41,7 +59,9 @@ export const ApiClient = {
             body: JSON.stringify(dadosAtualizados)
         });
 
-        if (!response.ok) throw new Error('Erro ao atualizar drink');
+        if (!response.ok) {
+            throw await parseErrorResponse(response, 'Erro ao atualizar drink');
+        }
         
         localStorage.setItem('drinksUpdatedAt', Date.now().toString());
     }

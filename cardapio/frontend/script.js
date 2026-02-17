@@ -9,30 +9,38 @@ function renderizarDrinks(idContainer, chaveStorage, silencioso = false) {
         container.innerHTML = 'Carregando...';
     }
 
-    ApiClient.getDrinks(chaveStorage).then(drinks => {
-        container.innerHTML = '';
+    ApiClient.getDrinks(chaveStorage)
+        .then(drinks => {
+            container.innerHTML = '';
 
-        // Cria os cards
-        drinks.forEach(drink => {
-            if (!drink.ativo) return;
+            // Cria os cards
+            drinks.forEach(drink => {
+                if (!drink.ativo) return;
 
-            const card = document.createElement('div');
-            card.classList.add('drink-card');
+                const card = document.createElement('div');
+                card.classList.add('drink-card');
 
-            card.innerHTML = `
-                <div class="drink-foto">
-                    ${drink.imagem ? `<img src="${drink.imagem}" alt="${drink.nome}">` : ''}
-                </div>
-                <div class="drink-info">
-                    <h3>${drink.nome}</h3>
-                    <p class="descricao">${drink.descricao}</p>
-                    <p class="ingredientes"><strong>Ingredientes:</strong> ${drink.ingredientes}</p>
-                </div>
-            `;
+                card.innerHTML = `
+                    <div class="drink-foto">
+                        ${drink.imagem ? `<img src="${drink.imagem}" alt="${drink.nome}">` : ''}
+                    </div>
+                    <div class="drink-info">
+                        <h3>${drink.nome}</h3>
+                        <p class="descricao">${drink.descricao}</p>
+                        <p class="ingredientes"><strong>Ingredientes:</strong> ${drink.ingredientes}</p>
+                    </div>
+                `;
 
-            container.appendChild(card);
+                container.appendChild(card);
+            });
+        })
+        .catch((error) => {
+            console.error(`[cardapio] Falha ao carregar ${chaveStorage}:`, error.message);
+
+            if (!silencioso) {
+                container.innerHTML = 'Nao foi possivel carregar os drinks agora.';
+            }
         });
-    });
 }
 
 

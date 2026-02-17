@@ -18,8 +18,16 @@ async function renderizarAdmin(idContainer, chaveStorage) {
 
     container.innerHTML = 'Carregando...';
 
-    // Busca drinks da categoria
-    const drinks = await ApiClient.getDrinks(chaveStorage);
+    let drinks = [];
+    try {
+        // Busca drinks da categoria
+        drinks = await ApiClient.getDrinks(chaveStorage);
+    } catch (error) {
+        console.error(`[painel] Falha ao carregar ${chaveStorage}:`, error.message);
+        container.innerHTML = 'Nao foi possivel carregar os drinks.';
+        return;
+    }
+
     container.innerHTML = '';
 
     drinks.forEach((drink) => {
@@ -35,9 +43,15 @@ async function renderizarAdmin(idContainer, chaveStorage) {
         const checkbox = linha.querySelector('input');
         checkbox.addEventListener('change', async () => {
             // Envia apenas o status atualizado
-            await ApiClient.atualizarDrink(drink.id, {
-                ativo: checkbox.checked
-            });
+            try {
+                await ApiClient.atualizarDrink(drink.id, {
+                    ativo: checkbox.checked
+                });
+            } catch (error) {
+                checkbox.checked = !checkbox.checked;
+                console.error(`[painel] Falha ao atualizar ${drink.id}:`, error.message);
+                alert('Nao foi possivel atualizar o status agora.');
+            }
         });
         container.appendChild(linha);
     });
