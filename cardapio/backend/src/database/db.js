@@ -2,6 +2,7 @@ import dns from 'dns';
 import pkg from 'pg';
 const { Pool } = pkg;
 
+// configuração para o render aceitar o Supabase, estava recusando a conexão ipv4, ativei transaction pooler
 const isProduction = process.env.NODE_ENV === 'production';
 const hasDatabaseUrl = Boolean(process.env.DATABASE_URL);
 const parsedPoolMax = Number.parseInt(process.env.DB_POOL_MAX ?? '', 10);
@@ -42,7 +43,7 @@ async function createPool() {
   }
 
   const ssl = isProduction
-    ? { rejectUnauthorized: false, servername: originalHost }
+    ? { rejectUnauthorized: true, servername: originalHost }
     : false;
 
   return new Pool({

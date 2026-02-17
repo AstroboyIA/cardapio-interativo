@@ -11,7 +11,6 @@ export default class DrinksController {
             return res.json(drinks);
         } catch (error) {
             const message = error?.message || String(error);
-            console.error('[drinks] listarAtivos error:', message);
             return res.status(500).json({ error: message });
         }
     };
@@ -36,7 +35,6 @@ export default class DrinksController {
             return res.json(drinks);
         } catch (error) {
             const message = error?.message || String(error);
-            console.error('[drinks] listarPorCategoria error:', message);
             return res.status(400).json({ error: message });
         }
     };
@@ -86,7 +84,6 @@ export default class DrinksController {
             return res.json(drink);
         } catch (error) {
             const message = error?.message || String(error);
-            console.error('[drinks] atualizarStatus error:', message);
             return res.status(404).json({ error: message });
         }
     };

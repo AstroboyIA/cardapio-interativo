@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { autenticarToken } from '../middlewares/auth.middleware.js';
+import { apenasAdmin, autenticarToken } from '../middlewares/auth.middleware.js';
 
 
 export default function drinksRoutes(drinksController) {
@@ -18,43 +18,43 @@ export default function drinksRoutes(drinksController) {
     router.get(
         '/admin',
         // Lista tudo (admin)
-        autenticarToken,
+        autenticarToken, apenasAdmin,
         drinksController.listarTodos.bind(drinksController)
     );
 
     router.post('/',
         // Cria drink (admin)
-        autenticarToken,
+        autenticarToken, apenasAdmin,
         drinksController.criar.bind(drinksController)
     );
 
     router.patch('/:id',
         // Atualiza campos do drink (admin)
-        autenticarToken,
+        autenticarToken, apenasAdmin,
         drinksController.atualizar.bind(drinksController)
     );
 
     router.patch('/:id/status',
         // Atualiza somente o status ativo (admin)
-        autenticarToken,
+        autenticarToken, apenasAdmin,
         drinksController.atualizarStatus.bind(drinksController)
     );
 
     router.patch('/:id/ativar',
         // Ativa um drink (admin)
-        autenticarToken,
+        autenticarToken, apenasAdmin,
         drinksController.ativar.bind(drinksController)
     );
 
     router.patch('/:id/desativar',
         // Desativa um drink (admin)
-        autenticarToken,
+        autenticarToken, apenasAdmin,
         drinksController.desativar.bind(drinksController)
     );
 
     router.delete('/:id',
         // Remove um drink (admin)
-        autenticarToken,
+        autenticarToken, apenasAdmin,
         drinksController.remover.bind(drinksController)
     );
 
