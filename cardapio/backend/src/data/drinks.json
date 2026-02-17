@@ -22,7 +22,7 @@
       "descricao": "Intenso e sofisticado, ideal para quem aprecia sabores marcantes.",
       "ingredientes": "Gin, vermute rosso, Campari",
       "ativo": true,
-      "imagem": ""
+      "imagem": "assets/img/negroni-exemplo.jpeg"
     },
     {
       "id": 4,
@@ -30,7 +30,7 @@
       "descricao": "Cítrica e vibrante, com final seco e elegante.",
       "ingredientes": "Tequila, licor de laranja, limão",
       "ativo": true,
-      "imagem": ""
+      "imagem": "assets/img/margarita-exemplo.jpeg"
     }
   ],
   "drinks-autorais": [
