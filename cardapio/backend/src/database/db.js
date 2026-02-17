@@ -7,11 +7,12 @@ const isProduction = process.env.NODE_ENV === 'production';
 const hasDatabaseUrl = Boolean(process.env.DATABASE_URL);
 const parsedPoolMax = Number.parseInt(process.env.DB_POOL_MAX ?? '', 10);
 const poolMax = Number.isFinite(parsedPoolMax) && parsedPoolMax > 0 ? parsedPoolMax : 15;
+const sslRejectUnauthorized = process.env.DB_SSL_REJECT_UNAUTHORIZED === 'true';
 
 if (hasDatabaseUrl) {
   try {
     const { host } = new URL(process.env.DATABASE_URL);
-    console.log(`[db] DATABASE_URL detected host=${host} ssl=${isProduction}`);
+    console.log(`[db] DATABASE_URL detected host=${host} ssl=${isProduction} rejectUnauthorized=${sslRejectUnauthorized}`);
   } catch {
     console.warn('[db] DATABASE_URL present but invalid.');
   }
@@ -43,7 +44,7 @@ async function createPool() {
   }
 
   const ssl = isProduction
-    ? { rejectUnauthorized: true, servername: originalHost }
+    ? { rejectUnauthorized: sslRejectUnauthorized, servername: originalHost }
     : false;
 
   return new Pool({
