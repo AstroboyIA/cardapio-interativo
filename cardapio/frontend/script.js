@@ -1,5 +1,19 @@
 import { ApiClient } from './js/apiClient.js';
 
+function normalizarCaminhoImagem(caminho) {
+    if (!caminho) return '';
+
+    // Correção de erro vindo do db ".ipeg" -> ".jpeg"
+    return caminho.replace(/\.ipeg$/i, '.jpeg');
+}
+
+function alternarExtensaoJpegJpg(url) {
+    if (!url) return url;
+    if (/\.jpeg$/i.test(url)) return url.replace(/\.jpeg$/i, '.jpg');
+    if (/\.jpg$/i.test(url)) return url.replace(/\.jpg$/i, '.jpeg');
+    return url;
+}
+
 function renderizarDrinks(idContainer, chaveStorage, silencioso = false) {
     // Renderiza os drinks de uma categoria no cardapio publico
     const container = document.getElementById(idContainer);
@@ -16,13 +30,14 @@ function renderizarDrinks(idContainer, chaveStorage, silencioso = false) {
             // Cria os cards
             drinks.forEach(drink => {
                 if (!drink.ativo) return;
+                const imagem = normalizarCaminhoImagem(drink.imagem);
 
                 const card = document.createElement('div');
                 card.classList.add('drink-card');
 
                 card.innerHTML = `
                     <div class="drink-foto">
-                        ${drink.imagem ? `<img src="${drink.imagem}" alt="${drink.nome}">` : ''}
+                        ${imagem ? `<img src="${imagem}" alt="${drink.nome}" loading="lazy" decoding="async">` : ''}
                     </div>
                     <div class="drink-info">
                         <h3>${drink.nome}</h3>
@@ -30,6 +45,22 @@ function renderizarDrinks(idContainer, chaveStorage, silencioso = false) {
                         <p class="ingredientes"><strong>Ingredientes:</strong> ${drink.ingredientes}</p>
                     </div>
                 `;
+
+                const img = card.querySelector('img');
+                if (img) {
+                    img.addEventListener('error', () => {
+                        if (!img.dataset.fallbackApplied) {
+                            img.dataset.fallbackApplied = '1';
+                            const fallback = alternarExtensaoJpegJpg(img.getAttribute('src'));
+                            if (fallback && fallback !== img.getAttribute('src')) {
+                                img.setAttribute('src', fallback);
+                                return;
+                            }
+                        }
+
+                        img.remove();
+                    });
+                }
 
                 container.appendChild(card);
             });
